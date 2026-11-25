@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f8f5fc">
+    <title>Обновление «Зорко»</title>
+    <style>
+      body { min-height: 100dvh; display: grid; place-items: center; margin: 0; padding: 1rem; box-sizing: border-box; color: #2c1d42; background: #faf7fd; font: 1rem/1.6 system-ui, sans-serif; }
+      main { width: min(100%, 28rem); padding: clamp(1.25rem, 5vw, 2rem); box-sizing: border-box; border: 1px solid #ece0f7; border-radius: 1.25rem; background: white; }
+      h1 { margin: 0; font-size: clamp(1.4rem, 6vw, 1.8rem); line-height: 1.25; }
+      button { min-height: 44px; padding: 0.55rem 1rem; border: 0; border-radius: 0.75rem; background: #7041c4; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+      button:disabled { opacity: 0.65; cursor: wait; }
+      a { color: #6138a2; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Обновление «Зорко»</h1>
+      <p id="status" role="status">Скачайте свежую версию. История игр и настройки сохранятся на устройстве.</p>
+      <button id="update" type="button">Обновить и открыть</button>
+      <noscript><p>Для обновления включите JavaScript в браузере.</p></noscript>
+      <p><a id="app" href="../amblio/">Открыть «Зорко»</a></p>
+    </main>
+    <script>
+      const app = document.getElementById('app')
+      const button = document.getElementById('update')
+      const status = document.getElementById('status')
+
+      function activate(worker) {
+        return new Promise((resolve, reject) => {
+          let requested = false
+          const timeout = setTimeout(() => finish(new Error('Update timed out')), 25000)
+
+          function finish(error) {
+            clearTimeout(timeout)
+            worker.removeEventListener('statechange', checkState)
+            if (error) reject(error)
+            else resolve()
+          }
+
+          function checkState() {
+            if (worker.state === 'activated') finish()
+            if (worker.state === 'redundant') finish(new Error('Update was replaced'))
+            if (worker.state === 'installed' && !requested) {
+              requested = true
+              worker.postMessage({ type: 'SKIP_WAITING' })
+            }
+          }
+
+          worker.addEventListener('statechange', checkState)
+          checkState()
+        })
+      }
+
+      button.addEventListener('click', async () => {
+        button.disabled = true
+        status.textContent = 'Проверяем обновление…'
+        try {
+          const registration = await navigator.serviceWorker?.getRegistration(app.href)
+          if (registration?.scope === app.href) {
+            await registration.update()
+            const worker = registration.installing ?? registration.waiting ?? registration.active
+            if (worker) await activate(worker)
+          }
+          window.location.replace(app.href)
+        } catch {
+          status.textContent = 'Обновление пока не загрузилось. Проверьте подключение и попробуйте ещё раз.'
+          button.disabled = false
+        }
+      })
+    </script>
+  </body>
+</html>
