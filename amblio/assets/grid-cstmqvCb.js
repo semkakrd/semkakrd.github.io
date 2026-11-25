@@ -1,0 +1,1 @@
+var e=[0,1,2,3],t=[[-1,0],[0,1],[1,0],[0,-1]];function n(e,n,r,i=1){let[a,o]=t[r],s=Math.floor(e/n)+a*i,c=e%n+o*i;return s>=0&&c>=0&&s<n&&c<n?s*n+c:null}export{n,e as t};
