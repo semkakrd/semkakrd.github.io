@@ -1,0 +1,1 @@
+import{A as e,At as t,Ct as n,Mt as r,nn as i}from"./createLucideIcon-CYusjEms.js";function a(a){let o=t(),s=r(()=>!e(o.value));function c(){e(o.value)||(cancelAnimationFrame(o.value),o.value=void 0)}function l(){i&&(c(),o.value=requestAnimationFrame(e=>{o.value=void 0,a(e)}))}return n(c,!0),Object.assign(l,{cancel:c,isActive:s})}export{a as t};
