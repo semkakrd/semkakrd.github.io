@@ -1,0 +1,1 @@
+var e=`/amblio/assets/star-garden-CuNRAU1H.jpg`;export{e as t};
