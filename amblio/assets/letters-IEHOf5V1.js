@@ -1,0 +1,1 @@
+import{v as e}from"./index-DZL9N3K7.js";var t=[...`АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ`];function n(n,r,i=Math.random,a){let o=t.filter(e=>e!==n&&e!==a);return e([n,...e(o,i).slice(0,r-1)],i)}export{n as t};

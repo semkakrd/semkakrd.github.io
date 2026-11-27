@@ -1,1 +1,0 @@
-function e(e,t=-1,n=Math.random){return e<2||t<0||t>=e?Math.floor(n()*e):(t+1+Math.floor(n()*(e-1)))%e}function t(e,t=Math.random){let n=[...e];for(let e=n.length-1;e>0;e--){let r=Math.floor(t()*(e+1)),i=n[e];n[e]=n[r],n[r]=i}return n}export{t as n,e as t};
