@@ -1,0 +1,1 @@
+import{Et as e,Xt as t,_t as n,w as r,wt as i}from"./createLucideIcon-B7SyrmAA.js";function a(a){let o=i(),s=e(()=>!r(o.value));function c(){r(o.value)||(cancelAnimationFrame(o.value),o.value=void 0)}function l(){t&&(c(),o.value=requestAnimationFrame(e=>{o.value=void 0,a(e)}))}return n(c,!0),Object.assign(l,{cancel:c,isActive:s})}export{a as t};
