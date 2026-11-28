@@ -1,1 +1,0 @@
-import{Mt as e,Pt as t,Tt as n,in as r,j as i}from"./createLucideIcon-MSI5lYtp.js";function a(a){let o=e(),s=t(()=>!i(o.value));function c(){i(o.value)||(cancelAnimationFrame(o.value),o.value=void 0)}function l(){r&&(c(),o.value=requestAnimationFrame(e=>{o.value=void 0,a(e)}))}return n(c,!0),Object.assign(l,{cancel:c,isActive:s})}export{a as t};

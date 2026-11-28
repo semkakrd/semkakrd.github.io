@@ -1,0 +1,1 @@
+import{A as e,I as t}from"./useStorage-ClLoGwby.js";import{$ as n,K as r,tt as i}from"./createLucideIcon-C6cfwlAM.js";function a(a){let o=n(),s=i(()=>!e(o.value));function c(){e(o.value)||(cancelAnimationFrame(o.value),o.value=void 0)}function l(){t&&(c(),o.value=requestAnimationFrame(e=>{o.value=void 0,a(e)}))}return r(c,!0),Object.assign(l,{cancel:c,isActive:s})}export{a as t};
